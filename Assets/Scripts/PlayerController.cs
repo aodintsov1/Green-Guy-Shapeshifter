@@ -23,14 +23,11 @@ public class PlayerController : MonoBehaviour
     public PlayerControls playerControls;
     private void OnEnable()
     {
-        interact = playerControls.Movement.Interact;
-        interact.Enable();
-        interact.performed += InteractHandler;
+        playerControls.Enable();
     }
     private void OnDisable()
     {
-        interact.performed -= InteractHandler;
-        interact.Disable();
+        playerControls.Disable();
     }
     private void Awake()
     {
@@ -42,9 +39,32 @@ public class PlayerController : MonoBehaviour
     {
         greenGuy = GetComponent<SpriteRenderer>().sprite;
         formText = GameObject.Find("Form").GetComponent<TextMeshProUGUI>();
+        playerControls.Movement.Move.performed += OnMovePerformed;
+        playerControls.Movement.Move.canceled += OnMoveCanceled;
     }
+    private void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        movement = context.ReadValue<Vector2>();
 
-    void Update()
+        // Update last movement direction
+        if (movement.magnitude > 0)
+        {
+            lastMovementDirection = movement.normalized;
+        }
+        // Update animator parameters
+        animator.SetFloat("moveX", movement.x);
+        animator.SetFloat("moveY", movement.y);
+        animator.SetBool("isMoving", movement.magnitude > 0);
+        if (Input.GetKeyDown(KeyCode.E))
+            Interact();
+    }
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        // When movement input is released, stop the player
+        movement = Vector2.zero;
+        rb.velocity = Vector2.zero;
+    }
+    public void HandleUpdate()
     {
         MovementInput();
         UpdateFormText();
@@ -54,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = movement * moveSpeed;
     }
-    
+
     void MovementInput()
     {
         float mx = Input.GetAxisRaw("Horizontal");
@@ -107,33 +127,25 @@ public class PlayerController : MonoBehaviour
 
     void UpdateFormText()
     {
-        if (isSpiderForm)
-        {
-            formText.text = "Spider";
-        }
-        else
-        {
-            formText.text = "Alien";
-        }
+        formText.text = isSpiderForm ? "Spider" : "Alien";
     }
 
     private bool isWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) != null)
-        {
-            return false;
-        }
-        return true;
+        return Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) == null;
     }
-    private void InteractHandler(InputAction.CallbackContext context)
+    void Interact()
     {
+
         var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var interactPos = transform.position + facingDir;
         //Debug.DrawLine(transform.position, interactPos, Color.red, 1f);
         var collider = Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer);
         if (collider != null)
         {
-            Debug.Log("there is NPC here");
+            Debug.Log("there is an NPC here!");
+            collider.GetComponent<Interactable>()?.Interact();
         }
+
     }
 }
