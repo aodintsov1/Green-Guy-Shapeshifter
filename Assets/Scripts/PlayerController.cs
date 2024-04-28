@@ -104,6 +104,9 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
             Interact();
+        if (Input.GetKeyDown(KeyCode.Escape))
+                FindObjectOfType<StateManager>().ChangeSceneByName("Menu");
+            
     }
 
     private void OnTriggerEnter2D(Collider2D other)
