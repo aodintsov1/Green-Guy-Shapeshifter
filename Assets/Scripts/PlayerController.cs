@@ -55,8 +55,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
         animator.SetBool("isMoving", movement.magnitude > 0);
-        if (Input.GetKeyDown(KeyCode.E))
-            Interact();
     }
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
@@ -104,6 +102,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.position = targetPos;
         }
+        if (Input.GetKeyDown(KeyCode.E))
+            Interact();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
