@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.position = targetPos;
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
             Interact();
         if (Input.GetKeyDown(KeyCode.Escape))
                 FindObjectOfType<StateManager>().ChangeSceneByName("Menu");

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,9 +12,18 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rb;
     private Transform target;
     public float rotationSpeed = 5.0f;
+    public List<Transform> waypoints;
+    int waypointNum = 0;
+    Transform nextWaypoint;
+    public float waypointReachedDistance = 0.1f;
 
+    private void Start()
+    {
+        nextWaypoint = waypoints[waypointNum];
+    }
     private void FixedUpdate()
     {
+
         if (target != null)
         {
             // Calculate direction to the target
@@ -27,6 +37,26 @@ public class Enemy : MonoBehaviour
             // Move towards the target
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        }
+        else
+        {
+            Vector2 directionToWaypoint = (nextWaypoint.position - transform.position).normalized;
+            float angle = Mathf.Atan2(directionToWaypoint.y, directionToWaypoint.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            float step = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
+            float distance = Vector2.Distance(nextWaypoint.position, transform.position);
+            transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
+            if (distance <= waypointReachedDistance)
+            {
+                waypointNum++;
+                if (waypointNum >= waypoints.Count)
+                {
+                    waypointNum = 0;
+                }
+                nextWaypoint = waypoints[waypointNum];
+            }
         }
     }
 
@@ -63,7 +93,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator PlayHaptics(float seconds)
     {
-       //    Gamepad.current.SetMotorSpeeds(.25f, .25f);
+        //    Gamepad.current.SetMotorSpeeds(.25f, .25f);
         yield return new WaitForSeconds(seconds);
         InputSystem.ResetHaptics();
     }
