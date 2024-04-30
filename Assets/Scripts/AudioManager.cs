@@ -48,4 +48,14 @@ public class AudioManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    public void StopMusic()
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.source.isPlaying)
+            {
+                s.source.Stop();
+            }
+        }
+    }
 }

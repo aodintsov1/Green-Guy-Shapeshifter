@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Pathfinding;
+using UnityEngine.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
     int waypointNum = 0;
     Transform nextWaypoint;
     public float waypointReachedDistance = 0.1f;
+    public Light2D globalLight;
+    public AudioSource alertAudioSource;
 
     private void Start()
     {
@@ -90,6 +93,8 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             target = other.transform;
+            StopCoroutine("AlertMode");
+            StartCoroutine("AlertMode");
         }
     }
 
@@ -118,5 +123,16 @@ public class Enemy : MonoBehaviour
         {
             canAttack += Time.deltaTime;
         }
+    }
+    IEnumerator AlertMode()
+    {
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        audioManager.StopMusic();
+        alertAudioSource.Play();
+        globalLight.color = Color.red;
+        yield return new WaitForSeconds(20);
+        globalLight.color = Color.white;
+        alertAudioSource.Stop();
+        audioManager.Play("Green Guy L2");
     }
 }

@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator.SetBool("isSpiderForm", false);
+        animator.SetBool("isHumanForm", true);
         greenGuy = GetComponent<SpriteRenderer>().sprite;
         formText = GameObject.Find("Form").GetComponent<TextMeshProUGUI>();
         /*
@@ -118,52 +120,62 @@ public class PlayerController : MonoBehaviour
         if (isWalkable(targetPos))
         {
             rb.position = targetPos;
-        }
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
+        }/*
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))
             Interact();
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        */
+        if (Input.GetKeyDown(KeyCode.Escape))
             FindObjectOfType<StateManager>().ChangeSceneByName("Menu");
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && hasSpiderUpgrade)
         {
+            animator.SetBool("isSpiderForm", false);
+            animator.SetBool("isHumanForm", true);
             isHumanForm = true;
             isSpiderForm = false;
-            ChangeForm();
+            UpdateFormText();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && hasSpiderUpgrade)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasSpiderUpgrade)
         {
-            isSpiderForm = true;
+            animator.SetBool("isSpiderForm", true);
+            animator.SetBool("isHumanForm", false);
             isHumanForm = false;
-            ChangeForm();
+            isSpiderForm = true;
+            UpdateFormText();
         }
 
 
     }
+    /*
     void ChangeForm()
     {
         if (isSpiderForm)
         {
-            animator.SetBool("isSpiderForm", true);
-            animator.SetBool("isHumanForm", false);
+            animator.SetBool("isSpiderForm", false);
+            animator.SetBool("isHumanForm", true);
         }
         else if (isHumanForm)
         {
-            animator.SetBool("isHumanForm", true);
-            animator.SetBool("isSpiderForm", false);
+            animator.SetBool("isHumanForm", false);
+            animator.SetBool("isSpiderForm", true);
         }
         UpdateFormText();
 
     }
+    */
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SpiderPowerUp"))
         {
             //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
-            isSpiderForm = true;
             animator.SetBool("isSpiderForm", true);
-            ChangeForm();
+            animator.SetBool("isHumanForm", false);
+            isHumanForm = false;
+            isSpiderForm = true;
+            UpdateFormText();
+
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
-            keyWarningText.text = "Spider Upgrade Unlocked!";
+            keyWarningText.text = "Spider Form Unlocked!";
             StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
             hasSpiderUpgrade = true;
         }
