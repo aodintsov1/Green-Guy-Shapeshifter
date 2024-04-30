@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
+    public AIPath aiPath;
     public float speed = 3f;
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackSpeed = 1f;
@@ -20,12 +23,16 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         nextWaypoint = waypoints[waypointNum];
+        aiPath.enabled = false;
     }
     private void FixedUpdate()
     {
 
         if (target != null)
         {
+            aiPath.enabled = true;
+            aiPath.destination = target.position;
+            /*
             // Calculate direction to the target
             Vector2 directionToTarget = (target.position - transform.position).normalized;
 
@@ -37,9 +44,11 @@ public class Enemy : MonoBehaviour
             // Move towards the target
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+            */
         }
         else
         {
+            aiPath.enabled = false;
             Vector2 directionToWaypoint = (nextWaypoint.position - transform.position).normalized;
             float angle = Mathf.Atan2(directionToWaypoint.y, directionToWaypoint.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
