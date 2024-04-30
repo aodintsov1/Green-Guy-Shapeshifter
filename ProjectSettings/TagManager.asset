@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpiderPowerUp
   - Health
+  - GateSpot
   layers:
   - Default
   - TransparentFX
