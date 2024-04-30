@@ -23,18 +23,25 @@ public class AudioManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Game")
+        if (scene.name == "Menu")
         {
             Play("Green Guy L1");
+        }
+        if (scene.name == "Game")
+        {
+            Play("Green Guy L2");
         }
     }
     public void Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
         s.source.Play();
     }
     void Start()
     {
+        Debug.LogWarning("Sound:" + name + " not found!");
         Play("Green Guy L1");
     }
     void OnDestroy()

@@ -1716,6 +1716,9 @@ GameObject:
   - component: {fileID: 635591220}
   - component: {fileID: 635591222}
   - component: {fileID: 635591221}
+  - component: {fileID: 635591225}
+  - component: {fileID: 635591224}
+  - component: {fileID: 635591223}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -1776,8 +1779,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -840578011
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1863,6 +1866,112 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!66 &635591223
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635591219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 635591219}
+--- !u!50 &635591224
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635591219}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!19719996 &635591225
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635591219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &636517097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,11 +3612,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a1a8a0d11a8e74185863fc7d2316a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 1
   rb: {fileID: 1274824709}
   spiderSprite: {fileID: 7482667652216324306, guid: e26715fc203e64045b7d05eeeab02c74, type: 3}
   formText: {fileID: 1069982592}
   isSpiderForm: 0
+  isHumanForm: 1
   solidObjectsLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -3516,6 +3626,17 @@ MonoBehaviour:
     m_Bits: 256
   playerHealth: {fileID: 0}
   keyWarningText: {fileID: 1929615338}
+  dialogue1:
+    lines:
+    - "Human: Don\u2019t fret over staying in here for too long."
+    - "Human: Eventually, we\u2019ll move you to a nicer cage in the exotic exhibition
+      of the Lunar Zoo!"
+    - 'Human: Our people will have never seen anything like you.'
+    - "Green Guy: You can\u2019t keep me here! I refuse to be exploited!"
+    - "Human: Well, too bad. Your chances of escaping are unlikely. Even if you did
+      manage to escape, there\u2019s simply no way for you to sneak past anyone in
+      this building considering your freaky appearance."
+  hasSpiderUpgrade: 0
 --- !u!70 &1274824713
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4106,9 +4227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Green Guy L1
-    clip: {fileID: 8300000, guid: ee7f32201142db74d9502e93447ce08e, type: 3}
-    volume: 0.428
+  - name: Green Guy L2
+    clip: {fileID: 8300000, guid: 583ce08972d56ce45b35cff511d8974d, type: 3}
+    volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}

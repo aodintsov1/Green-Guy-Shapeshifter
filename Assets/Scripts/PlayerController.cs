@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI formText;
     Vector2 movement;
     public bool isSpiderForm = false;
+    public bool isHumanForm = true;
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
     private Animator animator;
@@ -25,7 +27,10 @@ public class PlayerController : MonoBehaviour
     public PlayerControls playerControls;
     public PlayerHealth playerHealth;
     public TextMeshProUGUI keyWarningText;
+    [SerializeField] Dialogue dialogue1;
+    public bool hasSpiderUpgrade = false;
 
+    /*
     private void OnEnable()
     {
         playerControls.Enable();
@@ -34,20 +39,25 @@ public class PlayerController : MonoBehaviour
     {
         playerControls.Disable();
     }
+    */
     private void Awake()
     {
         animator = GetComponent<Animator>();
         playerControls = new PlayerControls();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
         greenGuy = GetComponent<SpriteRenderer>().sprite;
         formText = GameObject.Find("Form").GetComponent<TextMeshProUGUI>();
+        /*
         playerControls.Movement.Move.performed += OnMovePerformed;
         playerControls.Movement.Move.canceled += OnMoveCanceled;
+        */
         playerHealth = GetComponent<PlayerHealth>();
     }
+    /*
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
@@ -62,6 +72,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("moveY", movement.y);
         animator.SetBool("isMoving", movement.magnitude > 0);
     }
+    */
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
         // When movement input is released, stop the player
@@ -110,11 +121,38 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Z))
             Interact();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape))
             FindObjectOfType<StateManager>().ChangeSceneByName("Menu");
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            isHumanForm = true;
+            isSpiderForm = false;
+            ChangeForm();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && hasSpiderUpgrade)
+        {
+            isSpiderForm = true;
+            isHumanForm = false;
+            ChangeForm();
+        }
+
 
     }
+    void ChangeForm()
+    {
+        if (isSpiderForm)
+        {
+            animator.SetBool("isSpiderForm", true);
+            animator.SetBool("isHumanForm", false);
+        }
+        else if (isHumanForm)
+        {
+            animator.SetBool("isHumanForm", true);
+            animator.SetBool("isSpiderForm", false);
+        }
+        UpdateFormText();
 
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SpiderPowerUp"))
@@ -122,10 +160,12 @@ public class PlayerController : MonoBehaviour
             //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
             isSpiderForm = true;
             animator.SetBool("isSpiderForm", true);
+            ChangeForm();
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
             keyWarningText.text = "Spider Upgrade Unlocked!";
             StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
+            hasSpiderUpgrade = true;
         }
     }
 
@@ -163,5 +203,16 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         textElement.gameObject.SetActive(false);
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Game")
+        {
+            StartCoroutine(DialogueManager.Instance.ShowDialogue(dialogue1));
+        }
+    }
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
