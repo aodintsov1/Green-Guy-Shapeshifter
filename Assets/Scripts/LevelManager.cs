@@ -16,6 +16,11 @@ public class LevelManager : MonoBehaviour
         if (_ui != null)
         {
             _ui.ToggleDeathScreen();
+            GameObject continueButton = _ui.GetContinueButton();
+            if (continueButton != null)
+            {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(continueButton);
+            }
         }
     }
 }

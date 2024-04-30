@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateFormText()
     {
-        formText.text = isSpiderForm ? "Spider" : "Alien";
+        formText.text = isSpiderForm ? "SPIDER" : "ALIEN";
     }
 
     private bool isWalkable(Vector3 targetPos)
