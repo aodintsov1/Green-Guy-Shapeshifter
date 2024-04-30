@@ -12,6 +12,7 @@ public class ItemHolder : MonoBehaviour
     public GameObject greenKeyWarning;
     public GameObject blueKeyWarning;
     public TextMeshProUGUI keyWarningText;
+    public float warningDisplayDuration = 5f;
     private void Awake()
     {
         keyList = new List<Key.KeyType>();
@@ -48,20 +49,28 @@ public class ItemHolder : MonoBehaviour
                     {
                         LevelManager.instance.KeyWarning();
                         keyWarningText.text = "Missing Red Key!";
+                        StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                     else if (!ContainsKey(Key.KeyType.Green))
                     {
                         LevelManager.instance.KeyWarning();
                         keyWarningText.text = "Missing Green Key!";
+                        StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                     else if (!ContainsKey(Key.KeyType.Blue))
                     {
                         LevelManager.instance.KeyWarning();
                         keyWarningText.text = "Missing Blue Key!";
+                        StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                 }
             }
         }
+    }
+    IEnumerator DeactivateTextAfterDelay(TextMeshProUGUI textElement, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        textElement.gameObject.SetActive(false);
     }
 
 }
