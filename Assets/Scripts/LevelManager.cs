@@ -23,4 +23,12 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    public void KeyWarning()
+    {
+        UIManager _ui = GetComponent<UIManager>();
+        if (_ui != null)
+        {
+            _ui.ToggleKeyWarning();
+        }
+    }
 }

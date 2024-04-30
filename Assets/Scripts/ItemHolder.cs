@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static Key;
 
 public class ItemHolder : MonoBehaviour
 {
     private List<Key.KeyType> keyList;
+    public GameObject keyWarning;
+    public GameObject redKeyWarning;
+    public GameObject greenKeyWarning;
+    public GameObject blueKeyWarning;
+    public TextMeshProUGUI keyWarningText;
     private void Awake()
     {
         keyList = new List<Key.KeyType>();
@@ -26,13 +33,36 @@ public class ItemHolder : MonoBehaviour
             AddKey(key.GetKeyType());
             Destroy(key.gameObject);
         }
-        KeyCheck keyCheck = collider.GetComponent<KeyCheck>();
-        if (keyCheck != null)
+        else
         {
-            if (ContainsKey(keyCheck.GetKeyType()))
+            KeyCheck keyCheck = collider.GetComponent<KeyCheck>();
+            if (keyCheck != null)
             {
-                keyCheck.OpenDoor();
+                if (ContainsKey(keyCheck.GetKeyType()))
+                {
+                    keyCheck.OpenDoor();
+                }
+                else
+                {
+                    UpdateKeyWarningText();
+                }
             }
+        }
+    }
+    private void UpdateKeyWarningText()
+    {
+        if (!ContainsKey(Key.KeyType.Red))
+        {
+            
+            keyWarningText.text = "Missing Red Key!";
+        }
+        if (!ContainsKey(Key.KeyType.Green))
+        {
+            keyWarningText.text = "Missing Green Key!";
+        }
+        if (!ContainsKey(Key.KeyType.Blue))
+        {
+            keyWarningText.text = "Missing Blue Key!";
         }
     }
 }
