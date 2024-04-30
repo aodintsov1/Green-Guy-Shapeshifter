@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastMovementDirection = Vector2.zero; // Track last movement direction
     private InputAction interact;
     public PlayerControls playerControls;
+    public PlayerHealth playerHealth;
     private void OnEnable()
     {
         playerControls.Enable();
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         formText = GameObject.Find("Form").GetComponent<TextMeshProUGUI>();
         playerControls.Movement.Move.performed += OnMovePerformed;
         playerControls.Movement.Move.canceled += OnMoveCanceled;
+        playerHealth = GetComponent<PlayerHealth>();
     }
     private void OnMovePerformed(InputAction.CallbackContext context)
     {

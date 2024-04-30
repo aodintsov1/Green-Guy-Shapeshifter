@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator PlayHaptics(float seconds)
     {
-       // Gamepad.current.SetMotorSpeeds(.25f, .25f);
+       //    Gamepad.current.SetMotorSpeeds(.25f, .25f);
         yield return new WaitForSeconds(seconds);
         InputSystem.ResetHaptics();
     }

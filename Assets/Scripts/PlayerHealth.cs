@@ -37,4 +37,13 @@ public class PlayerHealth : MonoBehaviour
         float t = Time.deltaTime / 1f;
         healthSlider.value = Mathf.Lerp(healthSlider.value, health, t);
     }
+    public void IncreaseHealth(float amount)
+    {
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        healthSlider.value = health;
+    }
 }
