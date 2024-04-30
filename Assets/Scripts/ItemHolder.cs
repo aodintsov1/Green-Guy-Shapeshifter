@@ -44,25 +44,24 @@ public class ItemHolder : MonoBehaviour
                 }
                 else
                 {
-                    UpdateKeyWarningText();
+                    if (!ContainsKey(Key.KeyType.Red))
+                    {
+                        LevelManager.instance.KeyWarning();
+                        keyWarningText.text = "Missing Red Key!";
+                    }
+                    else if (!ContainsKey(Key.KeyType.Green))
+                    {
+                        LevelManager.instance.KeyWarning();
+                        keyWarningText.text = "Missing Green Key!";
+                    }
+                    else if (!ContainsKey(Key.KeyType.Blue))
+                    {
+                        LevelManager.instance.KeyWarning();
+                        keyWarningText.text = "Missing Blue Key!";
+                    }
                 }
             }
         }
     }
-    private void UpdateKeyWarningText()
-    {
-        if (!ContainsKey(Key.KeyType.Red))
-        {
-            
-            keyWarningText.text = "Missing Red Key!";
-        }
-        if (!ContainsKey(Key.KeyType.Green))
-        {
-            keyWarningText.text = "Missing Green Key!";
-        }
-        if (!ContainsKey(Key.KeyType.Blue))
-        {
-            keyWarningText.text = "Missing Blue Key!";
-        }
-    }
+
 }
