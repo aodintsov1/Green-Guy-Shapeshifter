@@ -8,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
+    private static bool isAlarmPlaying = false;
     public AIPath aiPath;
     public float speed = 3f;
     [SerializeField] private float attackDamage = 10f;
@@ -97,7 +98,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine("AlertMode");
         }
     }
-
+    /*
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -105,6 +106,7 @@ public class Enemy : MonoBehaviour
             target = null;
         }
     }
+    */
     IEnumerator PlayHaptics(float seconds)
     {
         //    Gamepad.current.SetMotorSpeeds(.25f, .25f);
@@ -126,13 +128,25 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator AlertMode()
     {
+        aiPath.enabled = true;
+        aiPath.destination = target.position;
         AudioManager audioManager = FindObjectOfType<AudioManager>();
         audioManager.StopMusic();
-        alertAudioSource.Play();
-        globalLight.color = Color.red;
-        yield return new WaitForSeconds(20);
+        if (!isAlarmPlaying)
+        {
+            alertAudioSource.Play();
+            globalLight.color = Color.red;
+            isAlarmPlaying = true;
+        }
+        yield return new WaitForSeconds(10);
         globalLight.color = Color.white;
-        alertAudioSource.Stop();
+        if (alertAudioSource.isPlaying)
+        {
+            alertAudioSource.Stop();
+            isAlarmPlaying = false;
+        }
         audioManager.Play("Green Guy L2");
+        target = null;
+        aiPath.enabled = false;
     }
 }
