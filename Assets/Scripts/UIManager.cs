@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject deathScreen;
+    [SerializeField] GameObject gameEnd;
     [SerializeField] GameObject keyWarning;
     [SerializeField] GameObject continueButton;
     public void ToggleDeathScreen()
@@ -18,5 +19,9 @@ public class UIManager : MonoBehaviour
     public GameObject GetContinueButton()
     {
         return continueButton.gameObject;
+    }
+    public void ToggleGameEnd()
+    {
+        gameEnd.SetActive(!gameEnd.activeSelf);
     }
 }

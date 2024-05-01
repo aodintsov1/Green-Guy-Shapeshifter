@@ -23,6 +23,19 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    public void GameEnd()
+    {
+        UIManager _ui = GetComponent<UIManager>();
+        if (_ui != null)
+        {
+            _ui.ToggleGameEnd();
+            GameObject continueButton = _ui.GetContinueButton();
+            if (continueButton != null)
+            {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(continueButton);
+            }
+        }
+    }
     public void KeyWarning()
     {
         UIManager _ui = GetComponent<UIManager>();

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI formText;
     Vector2 movement;
     public bool isSpiderForm = false;
+    public bool isFishForm = false;
     public bool isHumanForm = true;
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI keyWarningText;
     [SerializeField] Dialogue dialogue1;
     public bool hasSpiderUpgrade = false;
+    public bool hasFishUpgrade = false;
 
     /*
     private void OnEnable()
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator.SetBool("isFishForm", false);
         animator.SetBool("isSpiderForm", false);
         animator.SetBool("isHumanForm", true);
         greenGuy = GetComponent<SpriteRenderer>().sprite;
@@ -126,20 +129,34 @@ public class PlayerController : MonoBehaviour
         */
         if (Input.GetKeyDown(KeyCode.Escape))
             FindObjectOfType<StateManager>().ChangeSceneByName("Menu");
-        if (Input.GetKeyDown(KeyCode.Alpha1) && hasSpiderUpgrade)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             animator.SetBool("isSpiderForm", false);
             animator.SetBool("isHumanForm", true);
+            animator.SetBool("isFishForm", false);
             isHumanForm = true;
             isSpiderForm = false;
+            isFishForm = false;
             UpdateFormText();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && hasSpiderUpgrade)
         {
             animator.SetBool("isSpiderForm", true);
             animator.SetBool("isHumanForm", false);
+            animator.SetBool("isFishForm", false);
             isHumanForm = false;
             isSpiderForm = true;
+            isFishForm = false;
+            UpdateFormText();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && hasFishUpgrade)
+        {
+            animator.SetBool("isSpiderForm", false);
+            animator.SetBool("isHumanForm", false);
+            animator.SetBool("isFishForm", true);
+            isHumanForm = false;
+            isSpiderForm = false;
+            isFishForm = true;
             UpdateFormText();
         }
 
@@ -169,8 +186,10 @@ public class PlayerController : MonoBehaviour
             //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
             animator.SetBool("isSpiderForm", true);
             animator.SetBool("isHumanForm", false);
+            animator.SetBool("isFishForm", false);
             isHumanForm = false;
             isSpiderForm = true;
+            isFishForm = false;
             UpdateFormText();
 
             other.gameObject.SetActive(false);
@@ -178,6 +197,23 @@ public class PlayerController : MonoBehaviour
             keyWarningText.text = "Spider Form Unlocked!";
             StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
             hasSpiderUpgrade = true;
+        }
+        if (other.CompareTag("FishPowerUp"))
+        {
+            //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
+            animator.SetBool("isSpiderForm", false);
+            animator.SetBool("isHumanForm", false);
+            animator.SetBool("isFishForm", true);
+            isHumanForm = false;
+            isSpiderForm = false;
+            isFishForm = true;
+            UpdateFormText();
+
+            other.gameObject.SetActive(false);
+            LevelManager.instance.KeyWarning();
+            keyWarningText.text = "Fish Form Unlocked!";
+            StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
+            hasFishUpgrade = true;
         }
     }
 
@@ -190,7 +226,18 @@ public class PlayerController : MonoBehaviour
 
     void UpdateFormText()
     {
-        formText.text = isSpiderForm ? "SPIDER" : "ALIEN";
+        if (isHumanForm)
+        {
+            formText.text = "ALIEN";
+        }
+        else if (isSpiderForm) 
+        {
+            formText.text = "SPIDER";
+        }
+        else if (isFishForm)
+        {
+            formText.text = "FISH";
+        }
     }
 
     private bool isWalkable(Vector3 targetPos)
