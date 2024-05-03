@@ -7,8 +7,7 @@ public class GameEnd : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && playerController.isFishForm)
         {
-            LevelManager.instance.GameEnd();
-            gameObject.SetActive(false);
+            MenuManager.instance.ChangeSceneByName("End");
         }
     }
 }

@@ -62,22 +62,6 @@ public class PlayerController : MonoBehaviour
         */
         playerHealth = GetComponent<PlayerHealth>();
     }
-    /*
-    private void OnMovePerformed(InputAction.CallbackContext context)
-    {
-        movement = context.ReadValue<Vector2>();
-
-        // Update last movement direction
-        if (movement.magnitude > 0)
-        {
-            lastMovementDirection = movement.normalized;
-        }
-        // Update animator parameters
-        animator.SetFloat("moveX", movement.x);
-        animator.SetFloat("moveY", movement.y);
-        animator.SetBool("isMoving", movement.magnitude > 0);
-    }
-    */
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
         // When movement input is released, stop the player
@@ -89,12 +73,12 @@ public class PlayerController : MonoBehaviour
         MovementInput();
         UpdateFormText();
     }
-
+    /*
     private void FixedUpdate()
     {
-        rb.velocity = movement * moveSpeed;
+       /rb.velocity = movement * moveSpeed;
     }
-
+    */
     void MovementInput()
     {
         float mx = Input.GetAxisRaw("Horizontal");
@@ -131,67 +115,54 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<StateManager>().ChangeSceneByName("Menu");
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            animator.SetBool("isSpiderForm", false);
-            animator.SetBool("isHumanForm", true);
-            animator.SetBool("isFishForm", false);
-            isHumanForm = true;
-            isSpiderForm = false;
-            isFishForm = false;
-            UpdateFormText();
+            SwitchToHumanForm();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && hasSpiderUpgrade)
         {
-            animator.SetBool("isSpiderForm", true);
-            animator.SetBool("isHumanForm", false);
-            animator.SetBool("isFishForm", false);
-            isHumanForm = false;
-            isSpiderForm = true;
-            isFishForm = false;
-            UpdateFormText();
+            SwitchToSpiderForm();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && hasFishUpgrade)
         {
-            animator.SetBool("isSpiderForm", false);
-            animator.SetBool("isHumanForm", false);
-            animator.SetBool("isFishForm", true);
-            isHumanForm = false;
-            isSpiderForm = false;
-            isFishForm = true;
-            UpdateFormText();
+            SwitchToFishForm();
         }
-
-
     }
-    /*
-    void ChangeForm()
+    private void SwitchToHumanForm()
     {
-        if (isSpiderForm)
-        {
-            animator.SetBool("isSpiderForm", false);
-            animator.SetBool("isHumanForm", true);
-        }
-        else if (isHumanForm)
-        {
-            animator.SetBool("isHumanForm", false);
-            animator.SetBool("isSpiderForm", true);
-        }
+        animator.SetBool("isSpiderForm", false);
+        animator.SetBool("isHumanForm", true);
+        animator.SetBool("isFishForm", false);
+        isHumanForm = true;
+        isSpiderForm = false;
+        isFishForm = false;
         UpdateFormText();
-
     }
-    */
+
+    private void SwitchToSpiderForm()
+    {
+        animator.SetBool("isSpiderForm", true);
+        animator.SetBool("isHumanForm", false);
+        animator.SetBool("isFishForm", false);
+        isHumanForm = false;
+        isSpiderForm = true;
+        isFishForm = false;
+        UpdateFormText();
+    }
+
+    private void SwitchToFishForm()
+    {
+        animator.SetBool("isSpiderForm", false);
+        animator.SetBool("isHumanForm", false);
+        animator.SetBool("isFishForm", true);
+        isHumanForm = false;
+        isSpiderForm = false;
+        isFishForm = true;
+        UpdateFormText();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SpiderPowerUp"))
         {
-            //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
-            animator.SetBool("isSpiderForm", true);
-            animator.SetBool("isHumanForm", false);
-            animator.SetBool("isFishForm", false);
-            isHumanForm = false;
-            isSpiderForm = true;
-            isFishForm = false;
-            UpdateFormText();
-
+           SwitchToSpiderForm();
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
             keyWarningText.text = "Spider Form Unlocked!";
@@ -200,26 +171,25 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("FishPowerUp"))
         {
-            //GetComponent<SpriteRenderer>().sprite = spiderSprite; 
-            animator.SetBool("isSpiderForm", false);
-            animator.SetBool("isHumanForm", false);
-            animator.SetBool("isFishForm", true);
-            isHumanForm = false;
-            isSpiderForm = false;
-            isFishForm = true;
-            UpdateFormText();
-
+            SwitchToFishForm();
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
             keyWarningText.text = "Fish Form Unlocked!";
-            StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
             hasFishUpgrade = true;
+            StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
+        }
+        if (other.CompareTag("Health"))
+        {
+            other.gameObject.SetActive(false);
+            playerHealth.UpdateHealth(50);
+            LevelManager.instance.KeyWarning();
+            keyWarningText.text = "Health gained!";
+            StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
         }
     }
 
     public void ResetSprite()
     {
-        //GetComponent<SpriteRenderer>().sprite = greenGuy;
         isSpiderForm = false;
         animator.SetBool("isSpiderForm", false);
     }

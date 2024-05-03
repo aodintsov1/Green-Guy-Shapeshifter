@@ -1793,7 +1793,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: YOU DIED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2743,9 +2743,8 @@ GameObject:
   - component: {fileID: 636517100}
   - component: {fileID: 636517099}
   - component: {fileID: 636517098}
-  - component: {fileID: 636517101}
   m_Layer: 0
-  m_Name: Health
+  m_Name: HealthItem
   m_TagString: Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2863,18 +2862,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &636517101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636517097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52623d445296a74e8f810110eff6a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &679426760
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,7 +3054,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: YOU ESCAPED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4017,15 +4004,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: ALIEN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278255378
+  m_fontColor: {r: 0.07066631, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5181,7 +5168,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 256
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 1274824714}
   keyWarningText: {fileID: 1929615338}
   dialogue1:
     lines:
@@ -5615,7 +5602,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6479,7 +6466,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13260,7 +13247,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue test
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -13268,7 +13255,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0.24122919, g: 1, b: 0.08962262, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13545,7 +13532,7 @@ GameObject:
   - component: {fileID: 1698283639}
   - component: {fileID: 1698283638}
   m_Layer: 0
-  m_Name: FishPowerUP
+  m_Name: FishPowerUp
   m_TagString: FishPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14240,6 +14227,7 @@ GameObject:
   - component: {fileID: 1929615337}
   - component: {fileID: 1929615339}
   - component: {fileID: 1929615338}
+  - component: {fileID: 1929615340}
   m_Layer: 5
   m_Name: KeyWarning
   m_TagString: Untagged
@@ -14295,8 +14283,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 0.14890547, g: 1, b: 0.023584902, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14313,7 +14301,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14352,7 +14340,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1929615339
@@ -14363,6 +14351,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929615336}
   m_CullTransparentMesh: 1
+--- !u!114 &1929615340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929615336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1935335700
 GameObject:
   m_ObjectHideFlags: 3

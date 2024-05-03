@@ -20,7 +20,10 @@ public class ItemHolder : MonoBehaviour
     public void AddKey(Key.KeyType keyType)
     {
         Debug.Log("Added key: " + keyType);
+        LevelManager.instance.KeyWarning();
+        keyWarningText.text = "Picked up the Red Key";
         keyList.Add(keyType);
+        StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
     }
     public bool ContainsKey(Key.KeyType keyType)
     {

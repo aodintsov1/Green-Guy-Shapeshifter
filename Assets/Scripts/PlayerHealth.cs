@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health = maxHealth;
         healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
     }
     public void UpdateHealth(float mod)
     {
@@ -39,11 +40,6 @@ public class PlayerHealth : MonoBehaviour
     }
     public void IncreaseHealth(float amount)
     {
-        health += amount;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-        healthSlider.value = health;
+        UpdateHealth(amount);
     }
 }

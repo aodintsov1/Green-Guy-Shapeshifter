@@ -52,27 +52,30 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            aiPath.enabled = false;
-            Vector2 directionToWaypoint = (nextWaypoint.position - transform.position).normalized;
-            float angle = Mathf.Atan2(directionToWaypoint.y, directionToWaypoint.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
-            float distance = Vector2.Distance(nextWaypoint.position, transform.position);
-            transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
-            if (distance <= waypointReachedDistance)
-            {
-                waypointNum++;
-                if (waypointNum >= waypoints.Count)
-                {
-                    waypointNum = 0;
-                }
-                nextWaypoint = waypoints[waypointNum];
-            }
+            Patrol();
         }
     }
-
+    private void Patrol()
+    {
+        aiPath.enabled = false;
+        Vector2 directionToWaypoint = (nextWaypoint.position - transform.position).normalized;
+        float angle = Mathf.Atan2(directionToWaypoint.y, directionToWaypoint.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
+        float distance = Vector2.Distance(nextWaypoint.position, transform.position);
+        transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, step);
+        if (distance <= waypointReachedDistance)
+        {
+            waypointNum++;
+            if (waypointNum >= waypoints.Count)
+            {
+                waypointNum = 0;
+            }
+            nextWaypoint = waypoints[waypointNum];
+        }
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")

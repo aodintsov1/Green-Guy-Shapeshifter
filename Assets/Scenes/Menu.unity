@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1271627466}
+    m_SelectOnUp: {fileID: 1453139254}
     m_SelectOnDown: {fileID: 1453139254}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -393,8 +393,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'GREEN GUY: SHAPESHIFTER'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -527,8 +527,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -739,8 +739,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: OPTIONS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -873,8 +873,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: NEW GAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -966,7 +966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1271627465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 353070957}
-    m_SelectOnDown: {fileID: 1271627466}
+    m_SelectOnDown: {fileID: 353070957}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1559,8 +1559,8 @@ MonoBehaviour:
 
     For TritonWare Spring 2024'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3773da1dd51f214ab603018e689d401, type: 2}
-  m_sharedMaterial: {fileID: 9087834283500553741, guid: f3773da1dd51f214ab603018e689d401, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
+  m_sharedMaterial: {fileID: -152777187049159141, guid: 12d9b2722cac9684696a512b3d5d8271, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

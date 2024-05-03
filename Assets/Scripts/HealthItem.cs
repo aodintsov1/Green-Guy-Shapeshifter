@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-
+/*
 public class HealthItem : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public TextMeshProUGUI keyWarningText;
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.CompareTag("Player"))
+        KeyCheck keyCheck = GetComponent<KeyCheck>();
+        if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().UpdateHealth(50);
             gameObject.SetActive(false);
+            collision.GetComponent<PlayerHealth>().UpdateHealth(50);
+            LevelManager.instance.KeyWarning();
+            keyWarningText.text = "Health gained!";
+            StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
         }
     }
+    IEnumerator DeactivateTextAfterDelay(TextMeshProUGUI textElement, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        textElement.gameObject.SetActive(false);
+    }
 }
+*/

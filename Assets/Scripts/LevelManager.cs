@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,19 +17,6 @@ public class LevelManager : MonoBehaviour
         if (_ui != null)
         {
             _ui.ToggleDeathScreen();
-            GameObject continueButton = _ui.GetContinueButton();
-            if (continueButton != null)
-            {
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(continueButton);
-            }
-        }
-    }
-    public void GameEnd()
-    {
-        UIManager _ui = GetComponent<UIManager>();
-        if (_ui != null)
-        {
-            _ui.ToggleGameEnd();
             GameObject continueButton = _ui.GetContinueButton();
             if (continueButton != null)
             {
