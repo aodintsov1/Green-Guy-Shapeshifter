@@ -1666,7 +1666,7 @@ MonoBehaviour:
   sounds:
   - name: Green Guy L1
     clip: {fileID: 8300000, guid: ee7f32201142db74d9502e93447ce08e, type: 3}
-    volume: 0.4
+    volume: 0.3
     pitch: 1
     loop: 1
     source: {fileID: 0}

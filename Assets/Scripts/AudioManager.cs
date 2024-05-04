@@ -41,6 +41,10 @@ public class AudioManager : MonoBehaviour
         {
             Play("Green Guy L2");
         }
+        if (scene.name == "End")
+        {
+            Play("Green Guy L3");
+        }
     }
     public void Play (string name)
     {
@@ -51,7 +55,6 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.LogWarning("Sound:" + name + " not found!");
         Play("Green Guy L1");
     }
     void OnDestroy()

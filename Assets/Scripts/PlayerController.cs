@@ -73,12 +73,12 @@ public class PlayerController : MonoBehaviour
         MovementInput();
         UpdateFormText();
     }
-    /*
+    
     private void FixedUpdate()
     {
-       /rb.velocity = movement * moveSpeed;
+       rb.velocity = movement * moveSpeed;
     }
-    */
+    
     void MovementInput()
     {
         float mx = Input.GetAxisRaw("Horizontal");
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("moveY", lastMovementDirection.y);
         }
 
-        Vector2 targetPos = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        Vector2 targetPos = rb.position + movement * moveSpeed * Time.deltaTime;
         if (isWalkable(targetPos))
         {
             rb.position = targetPos;
@@ -175,8 +175,8 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
             keyWarningText.text = "Fish Form Unlocked!";
-            hasFishUpgrade = true;
             StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
+            hasFishUpgrade = true;
         }
         if (other.CompareTag("Health"))
         {
