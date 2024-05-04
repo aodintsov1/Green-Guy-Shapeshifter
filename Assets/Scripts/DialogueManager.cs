@@ -40,6 +40,8 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
+                FindObjectOfType<AudioManager>().StopMusic();
+                FindObjectOfType<AudioManager>().Play("Green Guy L2");
                 dialogueBox.SetActive(false);
                 currentLine = 0;
                 OnHideDialogue?.Invoke();

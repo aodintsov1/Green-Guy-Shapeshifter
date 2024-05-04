@@ -11,7 +11,8 @@ public class Key : MonoBehaviour
         Green,
         Blue
     }
-    public KeyType GetKeyType() { 
+    public KeyType GetKeyType() {
+        FindObjectOfType<AudioManager>().Play("Keys");
         return keyType; 
     }
 

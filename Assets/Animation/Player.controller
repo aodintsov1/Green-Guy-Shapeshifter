@@ -1532,10 +1532,10 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isSpiderForm
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isHumanForm
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isFishForm
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1757,7 +1757,7 @@ AnimatorStateMachine:
     m_Position: {x: 0, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2117906738051038152}
-    m_Position: {x: 380, y: 350, z: 0}
+    m_Position: {x: 470, y: 370, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
         }
         if (scene.name == "Game")
         {
-            Play("Green Guy L2");
+            Play("Space Station Ambience");
         }
         if (scene.name == "End")
         {
@@ -52,6 +52,16 @@ public class AudioManager : MonoBehaviour
         if (s == null)
             return;
         s.source.Play();
+    }
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+        if (s.source.isPlaying)
+        {
+            s.source.Stop();
+        }
     }
     void Start()
     {

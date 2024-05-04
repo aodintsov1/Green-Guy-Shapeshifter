@@ -140,11 +140,8 @@ public class Enemy : MonoBehaviour
         }
         yield return new WaitForSeconds(10);
         globalLight.color = Color.white;
-        if (alertAudioSource.isPlaying)
-        {
-            alertAudioSource.Stop();
-            isAlarmPlaying = false;
-        }
+        alertAudioSource.Stop();
+        isAlarmPlaying = false;
         audioManager.Play("Green Guy L2");
         target = null;
         aiPath.enabled = false;

@@ -10,6 +10,7 @@ public class Teleport : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && playerController.isSpiderForm)
         {
+            FindObjectOfType<AudioManager>().Play("Small steps…_Short");
             other.transform.position = teleportTarget.position;
         }
     }

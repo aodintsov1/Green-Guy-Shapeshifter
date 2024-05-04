@@ -13,6 +13,7 @@ public class KeyCheck : MonoBehaviour
     }
     public void OpenDoor()
     {
+        FindObjectOfType<AudioManager>().Play("Sci Fi Door");
         gameObject.SetActive(false);
     }
 }

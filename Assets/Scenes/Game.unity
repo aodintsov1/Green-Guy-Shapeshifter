@@ -5861,6 +5861,48 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Keys
+    clip: {fileID: 8300000, guid: 3187481259a2ec64b8825c62bbdd59c0, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sci Fi Door
+    clip: {fileID: 8300000, guid: 780490500342f374a8180f519d6ed0a0, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Transforming
+    clip: {fileID: 8300000, guid: b29555132d24c06459e1473bcc4271d1, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Space Station Ambience
+    clip: {fileID: 8300000, guid: 72e6b7fee1fd0c744aaebc786b7a2975, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Spider Walking... Short
+    clip: {fileID: 8300000, guid: d74e8a4db99d7b948abc3dab507f3b54, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Wet Steps
+    clip: {fileID: 8300000, guid: e6e4f0048c63a484e862a8554bd0aad4, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: "Small steps\u2026_Short"
+    clip: {fileID: 8300000, guid: f774d6c87c3b1ea4c86b712634d4bebc, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1486996538
 Transform:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
     private Animator animator;
-    private Vector2 lastMovementDirection = Vector2.zero; // Track last movement direction
+    private Vector2 lastMovementDirection = Vector2.zero;
     private InputAction interact;
     public PlayerControls playerControls;
     public PlayerHealth playerHealth;
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Dialogue dialogue1;
     public bool hasSpiderUpgrade = false;
     public bool hasFishUpgrade = false;
+    private bool isMovingFish = false;
+    private bool isMovingSpider = false;
 
     /*
     private void OnEnable()
@@ -73,12 +75,49 @@ public class PlayerController : MonoBehaviour
         MovementInput();
         UpdateFormText();
     }
-    
+
     private void FixedUpdate()
     {
-       rb.velocity = movement * moveSpeed;
+        float currentMoveSpeed = isFishForm ? moveSpeed / 40 : moveSpeed;
+        rb.velocity = movement * currentMoveSpeed;
+
+        if (isFishForm && movement.magnitude > 0)
+        {
+            if (!isMovingFish)
+            {
+                FindObjectOfType<AudioManager>().Play("Wet Steps"); 
+                isMovingFish = true;
+            }
+        }
+        else
+        {
+            if (isMovingFish)
+            {
+                FindObjectOfType<AudioManager>().Stop("WetSteps"); 
+                isMovingFish = false;
+            }
+        }
+
+        if (isSpiderForm && movement.magnitude > 0)
+        {
+            if (!isMovingSpider)
+            {
+                FindObjectOfType<AudioManager>().Play("Spider Walking... Short"); 
+                isMovingSpider = true;
+            }
+        }
+        else
+        {
+            if (isMovingSpider)
+            {
+                FindObjectOfType<AudioManager>().Stop("Spider Walking... Short"); 
+                isMovingSpider = false;
+            }
+        }
+
     }
-    
+
+
     void MovementInput()
     {
         float mx = Input.GetAxisRaw("Horizontal");
@@ -94,7 +133,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("moveY", my);
         movement = new Vector2(mx, my).normalized;
         animator.SetBool("isMoving", movement.magnitude > 0);
-
 
         if (movement.magnitude == 0)
         {
@@ -128,6 +166,7 @@ public class PlayerController : MonoBehaviour
     }
     private void SwitchToHumanForm()
     {
+        FindObjectOfType<AudioManager>().Play("Transforming");
         animator.SetBool("isSpiderForm", false);
         animator.SetBool("isHumanForm", true);
         animator.SetBool("isFishForm", false);
@@ -139,6 +178,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchToSpiderForm()
     {
+        FindObjectOfType<AudioManager>().Play("Transforming");
         animator.SetBool("isSpiderForm", true);
         animator.SetBool("isHumanForm", false);
         animator.SetBool("isFishForm", false);
@@ -150,6 +190,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchToFishForm()
     {
+        FindObjectOfType<AudioManager>().Play("Transforming");
         animator.SetBool("isSpiderForm", false);
         animator.SetBool("isHumanForm", false);
         animator.SetBool("isFishForm", true);
@@ -162,7 +203,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("SpiderPowerUp"))
         {
-           SwitchToSpiderForm();
+            SwitchToSpiderForm();
             other.gameObject.SetActive(false);
             LevelManager.instance.KeyWarning();
             keyWarningText.text = "Spider Form Unlocked!";
@@ -200,7 +241,7 @@ public class PlayerController : MonoBehaviour
         {
             formText.text = "ALIEN";
         }
-        else if (isSpiderForm) 
+        else if (isSpiderForm)
         {
             formText.text = "SPIDER";
         }
