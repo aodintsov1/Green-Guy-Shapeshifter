@@ -1,3 +1,5 @@
 # Green Guy: Shapeshifter
 
-## Gamejam entry for TritonWare Spring 2024 - Theme: Outer Space
+[Play the game here](https://aodintsov1.itch.io/green-guy)
+
+Gamejam entry for TritonWare Spring 2024 - Theme: Outer Space
