@@ -21,7 +21,7 @@ public class ItemHolder : MonoBehaviour
     {
         Debug.Log("Added key: " + keyType);
         LevelManager.instance.KeyWarning();
-        keyWarningText.text = "Picked up the Red Key";
+        keyWarningText.text = "Picked up the Red Keycard";
         keyList.Add(keyType);
         StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
     }
@@ -51,19 +51,19 @@ public class ItemHolder : MonoBehaviour
                     if (!ContainsKey(Key.KeyType.Red))
                     {
                         LevelManager.instance.KeyWarning();
-                        keyWarningText.text = "Missing Red Key!";
+                        keyWarningText.text = "Missing Red Keycard!";
                         StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                     else if (!ContainsKey(Key.KeyType.Green))
                     {
                         LevelManager.instance.KeyWarning();
-                        keyWarningText.text = "Missing Green Key!";
+                        keyWarningText.text = "Missing Green Keycard!";
                         StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                     else if (!ContainsKey(Key.KeyType.Blue))
                     {
                         LevelManager.instance.KeyWarning();
-                        keyWarningText.text = "Missing Blue Key!";
+                        keyWarningText.text = "Missing Blue Keycard!";
                         StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
                     }
                 }

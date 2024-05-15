@@ -8,6 +8,7 @@ TagManager:
   - Health
   - GateSpot
   - FishPowerUp
+  - RedKey
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3232868439
+    locked: 0
+  - name: UI
+    uniqueID: 2190472283
     locked: 0

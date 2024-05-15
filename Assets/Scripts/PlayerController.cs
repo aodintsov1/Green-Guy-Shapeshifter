@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public bool hasFishUpgrade = false;
     private bool isMovingFish = false;
     private bool isMovingSpider = false;
+    public GameObject redKeyIcon;
 
     /*
     private void OnEnable()
@@ -78,41 +79,44 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentMoveSpeed = isFishForm ? moveSpeed / 40 : moveSpeed;
-        rb.velocity = movement * currentMoveSpeed;
+        {
+            float currentMoveSpeed = isFishForm ? moveSpeed / 40 : moveSpeed;
+            rb.velocity = movement * currentMoveSpeed;
 
-        if (isFishForm && movement.magnitude > 0)
-        {
-            if (!isMovingFish)
+            if (isFishForm && movement.magnitude > 0)
             {
-                FindObjectOfType<AudioManager>().Play("Wet Steps"); 
-                isMovingFish = true;
+                if (!isMovingFish)
+                {
+                    FindObjectOfType<AudioManager>().Play("Wet Steps");
+                    isMovingFish = true;
+                }
             }
-        }
-        else
-        {
-            if (isMovingFish)
+            else
             {
-                FindObjectOfType<AudioManager>().Stop("WetSteps"); 
-                isMovingFish = false;
+                if (isMovingFish)
+                {
+                    FindObjectOfType<AudioManager>().Stop("Wet Steps");
+                    isMovingFish = false;
+                }
             }
-        }
 
-        if (isSpiderForm && movement.magnitude > 0)
-        {
-            if (!isMovingSpider)
+            if (isSpiderForm && movement.magnitude > 0)
             {
-                FindObjectOfType<AudioManager>().Play("Spider Walking... Short"); 
-                isMovingSpider = true;
+                if (!isMovingSpider)
+                {
+                    FindObjectOfType<AudioManager>().Play("Spider Walking... Short");
+                    isMovingSpider = true;
+                }
             }
-        }
-        else
-        {
-            if (isMovingSpider)
+            else
             {
-                FindObjectOfType<AudioManager>().Stop("Spider Walking... Short"); 
-                isMovingSpider = false;
+                if (isMovingSpider)
+                {
+                    FindObjectOfType<AudioManager>().Stop("Spider Walking... Short");
+                    isMovingSpider = false;
+                }
             }
+
         }
 
     }
@@ -227,6 +231,10 @@ public class PlayerController : MonoBehaviour
             keyWarningText.text = "Health gained!";
             StartCoroutine(DeactivateTextAfterDelay(keyWarningText, 5f));
         }
+        if (other.CompareTag("RedKey"))
+        {
+            redKeyIcon.SetActive(true);
+        }
     }
 
     public void ResetSprite()
@@ -255,6 +263,7 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) == null;
     }
+    /*
     void Interact()
     {
 
@@ -269,6 +278,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    */
     IEnumerator DeactivateTextAfterDelay(TextMeshProUGUI textElement, float delay)
     {
         yield return new WaitForSeconds(delay);
